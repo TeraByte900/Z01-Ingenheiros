@@ -14,4 +14,4 @@ begin
 
 	q <= a AND b;
 
-end Comp; 
+end Comp;  
