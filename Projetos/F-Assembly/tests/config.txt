@@ -1,10 +1,18 @@
 # nome | quantidade de testes | us de execucao
 # us -> clock = /20
+<<<<<<< HEAD
 add 1 1000
 #sub 1 1000
 #max 2 1000
 #mov 1 1000
 #abs 2 1000
+=======
+#add 1 1000
+#sub 1 1000
+#max 2 1000
+#mov 1 1000
+abs 2 1000
+>>>>>>> 2381e383bf1a4bd42c8ef72c7ea93e48696febe6
 #div  2 1000
 #mod 3 1000
 #factorial 2 10000
