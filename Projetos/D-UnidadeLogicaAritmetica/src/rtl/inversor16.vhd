@@ -14,7 +14,7 @@ end entity;
 
 architecture rtl of inversor16 is
 begin
-process(a,y,z)
+process(a, z) is
 begin
 	if (z = '0') then y <= a;
 	else y <= not a;

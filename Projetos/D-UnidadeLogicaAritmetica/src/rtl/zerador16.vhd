@@ -14,7 +14,7 @@ end zerador16;
 
 architecture rtl of zerador16 is
 begin
-process(a,y,z)
+process(a,z) is
 begin
 
 	if (z = '0') then y <= a;

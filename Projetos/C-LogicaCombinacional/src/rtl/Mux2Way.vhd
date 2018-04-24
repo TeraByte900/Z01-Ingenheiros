@@ -13,7 +13,10 @@ architecture arq of Mux2Way is
 begin
 process(a,b,sel) is
 begin
-q <= a when sel = '0';
-q <= b when sel = '1';
+if (sel = '0') then
+	q <= a;
+else	
+	q <= b;
+end if;
 end process;
 end arq;

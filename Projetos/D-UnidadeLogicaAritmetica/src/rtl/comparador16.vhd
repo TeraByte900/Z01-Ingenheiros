@@ -9,24 +9,24 @@ entity comparador16 is
    port(
 	   a    : in STD_LOGIC_VECTOR(15 downto 0);
        zr   : out STD_LOGIC;
-       ng   : out STD_LOGIC
-   );
-end comparador16;
+       ng   : out STD_LOGIC);
+   
+end entity;
 
 architecture rtl of comparador16 is
 
-begin
-process(a,zr,ng)
+begin 
+process(a) is
 begin
 
-	if (a = "0000000000000000") 
-		then zr <= '1';
+	if (a = "0000000000000000") then 
+	zr <= '1';
 	else
 		zr<= '0';
 	end if;
 
-	if (a(15) = '1') 
-		then ng <= '1';
+	if (a(15) = '1') then 
+		ng <= '1';
 	else
 		ng<= '0';
 	end if;

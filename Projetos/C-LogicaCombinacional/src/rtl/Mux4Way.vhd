@@ -15,9 +15,14 @@ architecture jor of Mux4Way is
 begin
 process (a,b,c,d,sel) is
 begin
-q <= a when sel="00";
-q <= b when sel="01";
-q <= c when sel="10";
-q <= d when sel="11";
+if (sel="00") then
+q <= a;
+elsif (sel="01") then
+q <= b;
+elsif (sel="10") then
+q <= c;
+else
+q <= d;
+end if;
 end process;
 end jor;
