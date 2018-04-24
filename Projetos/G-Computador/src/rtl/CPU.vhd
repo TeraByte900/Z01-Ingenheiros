@@ -104,5 +104,19 @@ architecture arch of CPU is
   signal s_pcout: STD_LOGIC_VECTOR(15 downto 0);
 
 begin
+  
+  ContU: ControlUnit port map (instruction, s_zr, s_ng, s_muxALUI_A, s_muxAM_ALU, s_muxSD_ALU, s_zx, s_nx, s_zy, s_f, s_no, s_loadA, s_loadD, s_loadS, writeM, s_loadPC);
+  PC: pc port map (clock, '1', s_loadPC, reset, s_regAout, pcout);
 
+  muxALUI: Mux16 port map(a<=s_ALUout,b<=instruction,sel<=s_muxALUI_A,q<=s_muxALUI_Aout);
+    
+  A: Register16 port map (clock<=clock,input<=instruction,load<=s_loadA,output<=s_regAout);
+  D: Register16 port map (clock<=clock,input<=s_ALUout,load<=s_loadD,output<=s_regDout);
+  S: Register16 port map (clock<=clock,input<=s_ALUout,load<=s_loadS,output<=s_regSout);
+    
+  muxSD: Mux16 port map(clock<=clock,a<=s_regSout,b<=s_regDout,sel<=s_muxSD_ALU,q<=s_muxSDout);
+  muxAM: Mux16 port map (clock<=clock,a<=s_regAout,b<=inM,sel<=s_muxAM_ALU,q<=s_muxAM_ALUout); 
+    
+  ula: ALU port map(x<=s_muxSDout,y<=s_muxAM_ALUout,
+                   zx<=s_zx,nx<=s_nx,zy<=s_zy,ny<=s_ny,f<=s_f,no<=s_no,zr<=s_zr,ng<=s_ng,saida<=s_ALUout);
 end architecture;

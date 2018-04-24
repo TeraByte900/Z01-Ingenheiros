@@ -58,18 +58,59 @@ ARCHITECTURE logic OF MemoryIO IS
           );
   end component;
 
-  component RAM16K IS
-      PORT
-      (
-          address	: IN STD_LOGIC_VECTOR (13 DOWNTO 0);
-          clock		: IN STD_LOGIC  := '1';
-          data		: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
-          wren		: IN STD_LOGIC ;
-          q		   : OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
-      );
-  end component;
+  	component RAM16K IS
+     	 PORT
+      		(
+          	address	: IN STD_LOGIC_VECTOR (13 DOWNTO 0);
+          	clock		: IN STD_LOGIC  := '1';
+          	data		: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+         	wren		: IN STD_LOGIC ;
+          	q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+      		);
+ 	end component;
+
+	component SCREEN IS
+     	 PORT
+      		(
+          	address	: IN STD_LOGIC_VECTOR (13 DOWNTO 0);
+          	clock_fast	: IN STD_LOGIC  := '1';
+		clock_slow 	: IN STD_LOGIC  := '1';
+          	load		: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
+         	input		: IN STD_LOGIC ;
+          	LCD		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+      		);
+ 	end component;
+
+  	component Register8 is
+		port(
+
+		clock:   in STD_LOGIC;
+		input:   in STD_LOGIC_VECTOR(7 downto 0);
+		load:    in STD_LOGIC;
+		output: out  STD_LOGIC_VECTOR(7 downto 0)
+		);
+	end component;
 
 BEGIN
 
+m0: RAM16K port map (
+	ADRESS => adress,
+	CLK_FAST => clock,
+	INPUT => data,
+	LOAD => wren
+   		     );
+m1: SCREEN port map (
+	ADRESS => adress,
+	CLK_FAST => clock_fast,
+	CLK_SLOW => clock_slow,
+	LOAD => load,
+	INPUT => input
+		     );
+
+m2: Register8 port map (
+	CLK_FAST => clock,
+	INPUT => input,
+	LOAD => load,
+		);
 
 END logic;
