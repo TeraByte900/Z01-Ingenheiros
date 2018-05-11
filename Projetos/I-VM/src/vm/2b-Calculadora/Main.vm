@@ -19,3 +19,16 @@
 //  ****************************************************
 
 function Main.main 0
+push constant 14
+push constant 2
+add
+pop local 0
+push constant 8
+push constant 1
+sub
+pop local 1
+push local 0 
+push local 1
+mult
+pop temp 1
+
