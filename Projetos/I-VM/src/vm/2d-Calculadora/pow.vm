@@ -1,0 +1,39 @@
+function pow 2
+	push constant 0
+	push argument 1
+	eq
+	if-goto end0
+	push constant 1
+	push argument 1
+	eq
+	if-goto end1
+	push argument 0
+	pop local 1
+	push constant 1
+	pop local 0
+label loop
+	push argument 1
+	push local 0
+	eq
+	if-goto end
+	push argument 0
+	push local 1
+	call mult 2
+	pop local 1
+	push constant 1
+	push local 0
+	add
+	pop local 0
+	goto loop
+label end
+	push local 1
+	return
+
+label end1
+	push argument 0
+	return
+
+label end0
+	push constant 1
+	return
+
