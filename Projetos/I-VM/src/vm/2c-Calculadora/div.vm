@@ -1,0 +1,28 @@
+function div 2
+
+	push argument 0
+	pop local 0
+	push constant 0
+	pop local 1
+
+label loop
+	
+	push local 0
+	push constant 0
+	eq
+	if-goto end
+	push local 1
+	push constant 1
+	add
+	pop local 1
+
+	push local 0
+	push argument 1
+	sub
+	pop local 0
+	goto loop
+
+label end
+	
+	push local 1
+	return	

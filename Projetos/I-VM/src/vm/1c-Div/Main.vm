@@ -12,3 +12,31 @@
 // ----------------------------------
 
 function Main.main 0
+
+	push constant 15
+	pop temp 0
+	push constant 0
+	pop temp 1
+
+label loop
+	
+	push temp 0
+	push constant 0
+	eq
+	if-goto end
+	push temp 1
+	push constant 1
+	add
+	pop temp 1
+
+	push temp 0
+	push constant 5
+	sub
+	pop temp 0
+	goto loop
+
+label end
+	
+	push temp 1
+	return	
+	
