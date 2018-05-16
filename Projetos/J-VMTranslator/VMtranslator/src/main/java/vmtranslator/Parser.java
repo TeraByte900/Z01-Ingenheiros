@@ -138,7 +138,19 @@ public class Parser {
      * @return somente o símbolo ou o valor número da instrução.
      */
     public String arg1(String command) {
-		return command;
+    	String arg = "";
+    	
+    	if(commandType(command)!=Parser.CommandType.C_RETURN){
+        
+	    	if(commandType(command)==Parser.CommandType.C_POP ||commandType(command)==Parser.CommandType.C_PUSH ||commandType(command)==Parser.CommandType.C_CALL ||commandType(command)==Parser.CommandType.C_FUNCTION  ){
+	    		arg = command.split("\\s+")[1];
+	    	}
+	    	
+	    	if(commandType(command)==Parser.CommandType.C_ARITHMETIC){
+	    		arg = command.toString();
+	        }
+    	}
+	    return arg;	
     }
 
     /**
