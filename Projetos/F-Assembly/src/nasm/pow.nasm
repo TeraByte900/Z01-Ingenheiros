@@ -9,6 +9,8 @@
 
 leaw $R1,%A
 movw (%A),%D
+movw %D ,%S
+decw %D
 
 WHILE:
 leaw $R1,%A
