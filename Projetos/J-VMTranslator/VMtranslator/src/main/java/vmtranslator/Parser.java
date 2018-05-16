@@ -98,7 +98,7 @@ public class Parser {
      * @return o tipo da instrução.
      */
     public CommandType commandType(String command) {
-    	if (command.endsWith("push")){
+    	if (command.startsWith("push")){
     		return CommandType.C_PUSH;
     	}
     	if (command.startsWith("pop")){
@@ -111,17 +111,19 @@ public class Parser {
     		return CommandType.C_IF;
     	}
     	   
-        if (command.startsWith("pop")){
-    		return CommandType.C_RETURN;////
+        if (command.startsWith("return")){
+    		return CommandType.C_RETURN;
     	}
-        if (command.startsWith("pop")){
-    		return CommandType.C_FUNCTION;////
+        if (command.startsWith("function")){
+    		return CommandType.C_FUNCTION;
     	}
-    	if (command.startsWith("pop")){
-    		return CommandType.C_ARITHMETIC;///
+    	if (command.startsWith("add")||command.startsWith("sub")||command.startsWith("neg")||command.startsWith("eq")
+    		||command.startsWith("gt")||command.startsWith("lt")||command.startsWith("and")||command.startsWith("or")
+    		||command.startsWith("not")){
+    		return CommandType.C_ARITHMETIC;
     	}
-    	if (command.startsWith("pop")){
-    		return CommandType.C_CALL;///
+    	if (command.startsWith("call")){
+    		return CommandType.C_CALL;
     	}
     	else{
     		return CommandType.C_LABEL;
