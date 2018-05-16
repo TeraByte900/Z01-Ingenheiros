@@ -160,7 +160,15 @@ public class Parser {
      * @return o símbolo da instrução (sem os dois pontos).
      */
     public Integer arg2(String command) {
-		return null;
+    	int arg;
+    	String num = "";
+
+    	if(commandType(command)==Parser.CommandType.C_POP ||commandType(command)==Parser.CommandType.C_PUSH ){
+    		num = command.split("\\s+")[2];
+    	}
+		arg = Integer.parseInt(num);
+		return  arg;
+    	
     }
 
     // fecha o arquivo de leitura
