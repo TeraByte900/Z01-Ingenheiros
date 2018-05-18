@@ -105,7 +105,7 @@ architecture arch of CPU is
 
 begin
   
-  ContU: ControlUnit port map (instruction, s_zr, s_ng, s_muxALUI_A, s_muxAM_ALU, s_muxSD_ALU, s_zx, s_nx, s_zy, s_f, s_no, s_loadA, s_loadD, s_loadS, writeM, s_loadPC);
+  ContU: ControlUnit port map (instruction, s_zr, s_ng, s_muxALUI_A, s_muxAM_ALU, s_muxSD_ALU, s_zx, s_nx, s_zy,s_ny, s_f, s_no, s_loadA, s_loadD, s_loadS, writeM, s_loadPC);
   ProgamCounter: pc port map (clock, '1', s_loadPC, reset, s_regAout, s_pcout);
 
   muxALUI: Mux16 port map(s_ALUout,instruction,s_muxALUI_A,s_muxALUI_Aout);
