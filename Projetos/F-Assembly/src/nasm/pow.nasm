@@ -6,20 +6,19 @@
 ; Eleva ao quadrado o valor da RAM[1] e armazena o resultado na RAM[0].
 ; Só funciona com números positivos
 
-
-leaw $R1,%A
-movw (%A),%D
-movw %D ,%S
+leaw $R1, %A
+movw (%A), %D
+movw %D, %S
 decw %D
 
 WHILE:
-leaw $R1,%A
-addw (%A),%S,%S
+leaw $R1, %A
+addw (%A), %S, %S
 decw %D
-leaw $WHILE , %A
+leaw $WHILE, %A
 jg %D
 nop
 
-leaw $R0,%A
-movw %S,(%A)
-; teamo<3
+leaw $R0, %A
+movw %S, (%A)
+
