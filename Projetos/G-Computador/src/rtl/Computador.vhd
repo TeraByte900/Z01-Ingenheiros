@@ -143,7 +143,7 @@ BEGIN
 		pcout => PC
 		);
 
-	memoria : MemoryIO PORT MAP(
+	MEMORY_MAPED : MemoryIO PORT MAP(
 		CLK_SLOW => CLK_SLOW,
 		CLK_FAST => CLK_FAST,
 		RST => RST_MEM,

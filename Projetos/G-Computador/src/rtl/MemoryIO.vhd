@@ -2,7 +2,36 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+entity MemoryIO is
 
+   PORT(
+        -- Sistema
+        CLK_SLOW : IN  STD_LOGIC;
+        CLK_FAST : IN  STD_LOGIC;
+        RST      : IN  STD_LOGIC;
+
+        -- RAM 16K
+        ADDRESS   : IN  STD_LOGIC_VECTOR (14 DOWNTO 0);
+        INPUT   : IN  STD_LOGIC_VECTOR (15 DOWNTO 0);
+        LOAD    : IN  STD_LOGIC ;
+        OUTPUT    : OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
+
+        -- LCD EXTERNAL I/OS
+        LCD_CS_N     : OUT   STD_LOGIC;
+        LCD_D        : INOUT STD_LOGIC_VECTOR(15 downto 0);
+        LCD_RD_N     : OUT   STD_LOGIC;
+        LCD_RESET_N  : OUT   STD_LOGIC;
+        LCD_RS       : OUT   STD_LOGIC; -- (DCx) 0 : reg, 1: command
+        LCD_WR_N     : OUT   STD_LOGIC;
+        LCD_ON       : OUT   STD_LOGIC := '1';  -- liga e desliga o LCD
+        LCD_INIT_OK  : OUT   STD_LOGIC;
+
+        -- Switchs
+        SW  : in std_logic_vector(9 downto 0);
+        LED : OUT std_logic_vector(9 downto 0)
+
+    );
+end entity;
 
 ARCHITECTURE logic OF MemoryIO IS
 
@@ -83,33 +112,30 @@ signal f1: STD_LOGIC_VECTOR(15 downto 0);
 
 BEGIN
 
+--check
+s1<= "00"when (ADDRESS <= "011111111111111") else
+     "01" when(ADDRESS <= "101001010111111") else
+     "10" when (ADDRESS = "101001011000000") else
+     "11";
 
-s1<= "00" when ADDRESS < "011111111111111";
-s1<= "00" when ADDRESS = "011111111111111";
-s1<= "00" when ADDRESS = "101001011000000";
-s1<= "01" when ADDRESS > "011111111111111" and ADDRESS < "101001010111111";
-s1<= "01" when ADDRESS = "101001010111111";
-s1<= "10" when ADDRESS = "101001011000000";
+s2<= '1' when (address <= "011111111111111") else
+     '0';
 
-s2<= '0' when address = "101001011000000";
-s2<= '1' when address < "011111111111111";
-s2<= '1' when address = "011111111111111";
-
-  
+--check  
 a1<= ADDRESS(13 downto 0);
-m0: DMux4Way port map('1',s1,v0,v1,v2,vi);
+--check
+m0: DMux4Way port map(LOAD,s1,v0,v2,v1,vi);
 
-m1: RAM16K port map(a1,CLK_FAST,INPUT,v0,v3);
+RAM: RAM16K port map(a1,CLK_FAST,INPUT,v0,v3);
 
 f1 <= "000000" & SW;
 m2: Mux16 port map(f1, v3,s2,v4);
 OUTPUT <= v4;
-
+--check
 LeeD: Register16 port map(CLK_SLOW,INPUT,v1,v5);
 LED <= v5(9 downto 0);
+--check
+ScReeNN: Screen port map(INPUT,v2,a1,CLK_FAST,CLK_SLOW,RST,LCD_INIT_OK,LCD_CS_N,LCD_D,LCD_RD_N,LCD_RS,LCD_RESET_N,LCD_WR_N);
 
- ScReeNN: Screen port map(INPUT,V2,a1,CLK_FAST,CLK_SLOW,RST,LCD_INIT_OK,LCD_CS_N,LCD_D,LCD_RD_N,LCD_RS,LCD_RESET_N,LCD_WR_N);
 
-
-
-END logic;
+end logic;

@@ -10,6 +10,7 @@
 package vmtranslator;
 
 import java.io.*;
+import java.util.Scanner;
 
 /**
  * Encapsula o código de leitura. Carrega as instruções na linguagem de máquina virtual a pilha,
@@ -17,18 +18,22 @@ import java.io.*;
  * Além disso, remove todos os espaços em branco e comentários.
  */
 public class Parser {
+	
+	public String line;
+	public Scanner scanner;
 
+	
     public String currentCommand = "";  // comando atual
     private BufferedReader fileReader;  // leitor de arquivo
 
     /** Enumerator para os tipos de comandos de Linguagem de Máquina Virtua a Pilha. */
     public static enum CommandType {
         C_ARITHMETIC,      // comandos aritméticos
-        C_PUSH,            // comandos de push
-        C_POP,             // comandos de pop
-        C_LABEL,           // label
-        C_GOTO,            // comando goto
-        C_IF,              // comando if-goto
+        C_PUSH,            // comandos de push //
+        C_POP,             // comandos de pop //
+        C_LABEL,           // label //
+        C_GOTO,            // comando goto //
+        C_IF,              // comando if-goto//
         C_FUNCTION,        // declaracao de funcao
         C_RETURN,          // retorno de funcao
         C_CALL             // chamada de funcao
@@ -39,8 +44,18 @@ public class Parser {
      * @param file arquivo VM que será feito o parser.
      */
     public Parser(String file) throws FileNotFoundException {
-        this.fileReader = new BufferedReader(new FileReader(file));
+    	this.line = new String();
+    	
+    	try {
+    	    File arquivo = new File(file);
+    		scanner = new Scanner(arquivo);
+    	}
+    	catch (FileNotFoundException e){
+    		System.out.println("Arquivo n�o encontrado - Erro");
+			e.printStackTrace();
+    	}
     }
+    
 
     /**
      * Carrega um comando e avança seu apontador interno para o próxima
@@ -49,6 +64,22 @@ public class Parser {
      * @return Verdadeiro se ainda há instruções, Falso se as instruções terminaram.
      */
     public Boolean advance() throws IOException {
+    	if (scanner.hasNext()){
+    		String helper = scanner.nextLine();
+    		helper = helper.trim();
+    		while(scanner.hasNext() && (helper.equals("") || helper.equals("\n") || helper.startsWith(";"))){
+    			helper = scanner.nextLine();
+    			helper = helper.trim();
+    		}
+    		line = helper;
+    		line = line.replaceAll("\\s+", " ");
+    		if(line.contains(";")){
+    			line = line.substring(0, line.indexOf(';'));
+    			line = line.trim();
+    		}
+    		return true;
+    	}
+    	return false;
     }
 
     /**
@@ -56,7 +87,7 @@ public class Parser {
      * @return a instrução atual para ser analilisada
      */
     public String command() {
-      return currentCommand;
+    	return this.line;
     }
 
     /**
@@ -67,7 +98,36 @@ public class Parser {
      * @return o tipo da instrução.
      */
     public CommandType commandType(String command) {
-    }
+    	if (command.startsWith("push")){
+    		return CommandType.C_PUSH;
+    	}
+    	if (command.startsWith("pop")){
+    		return CommandType.C_POP;
+    	}
+    	if (command.startsWith("goto")){
+    		return CommandType.C_GOTO;
+    	}
+    	if (command.startsWith("if-goto")){
+    		return CommandType.C_IF;
+    	}
+    	   
+        if (command.startsWith("return")){
+    		return CommandType.C_RETURN;
+    	}
+        if (command.startsWith("function")){
+    		return CommandType.C_FUNCTION;
+    	}
+    	if (command.startsWith("add")||command.startsWith("sub")||command.startsWith("neg")||command.startsWith("eq")
+    		||command.startsWith("gt")||command.startsWith("lt")||command.startsWith("and")||command.startsWith("or")
+    		||command.startsWith("not")){
+    		return CommandType.C_ARITHMETIC;
+    	}
+    	if (command.startsWith("call")){
+    		return CommandType.C_CALL;
+    	}
+    	else{
+    		return CommandType.C_LABEL;
+    	}    }
 
 
     /**
@@ -78,6 +138,19 @@ public class Parser {
      * @return somente o símbolo ou o valor número da instrução.
      */
     public String arg1(String command) {
+    	String arg = "";
+    	
+    	if(commandType(command)!=Parser.CommandType.C_RETURN){
+        
+	    	if(commandType(command)==Parser.CommandType.C_POP ||commandType(command)==Parser.CommandType.C_PUSH ||commandType(command)==Parser.CommandType.C_CALL ||commandType(command)==Parser.CommandType.C_FUNCTION  ){
+	    		arg = command.split("\\s+")[1];
+	    	}
+	    	
+	    	if(commandType(command)==Parser.CommandType.C_ARITHMETIC){
+	    		arg = command.toString();
+	        }
+    	}
+	    return arg;	
     }
 
     /**
@@ -87,6 +160,15 @@ public class Parser {
      * @return o símbolo da instrução (sem os dois pontos).
      */
     public Integer arg2(String command) {
+    	int arg;
+    	String num = "";
+
+    	if(commandType(command)==Parser.CommandType.C_POP ||commandType(command)==Parser.CommandType.C_PUSH ){
+    		num = command.split("\\s+")[2];
+    	}
+		arg = Integer.parseInt(num);
+		return  arg;
+    	
     }
 
     // fecha o arquivo de leitura
