@@ -139,6 +139,7 @@ public class Parser {
     	// JMP %D
 		String[] vector;
     	command = command.replace(",", " ");
+    	command = command.replaceAll("  ", " ");
 		vector = command.split(" ");
 		return vector;
     }

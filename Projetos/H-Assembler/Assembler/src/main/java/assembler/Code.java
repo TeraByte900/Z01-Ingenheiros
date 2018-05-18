@@ -21,111 +21,112 @@ public class Code {
     	if(mnemnonic.length < 2) {
     		return Dest;
     	}  
-    	else if(mnemnonic[0] == "jmp" || mnemnonic[0] == "je" || mnemnonic[0] == "jne" || mnemnonic[0] == "jg" || mnemnonic[0] == "jge" || mnemnonic[0] == "jl" || mnemnonic[0] == "jle" ) {
+    	else if(mnemnonic[0].equals("jmp") || mnemnonic[0].equals("je") || mnemnonic[0].equals("jne") || mnemnonic[0].equals("jg") || mnemnonic[0].equals("jge") || mnemnonic[0].equals("jl") || mnemnonic[0].equals("jle") ) {
     		return Dest;
     	}
+      	else if (mnemnonic[0].equals("subw")||mnemnonic[0].equals("rsubw")||mnemnonic[0].equals("addw")||mnemnonic[0].equals("andw")||mnemnonic[0].equals("orw")) {
+    		if (mnemnonic[3].equals("%A")) {
+    		Dest = "1000";
+    		}
+    		else if (mnemnonic[3].equals("%D")) {
+    		Dest = "0010";
+    		}
+    		else if (mnemnonic[3].equals("%S")) {
+    		Dest = "0100";
+    		}
+    		else if (mnemnonic[3].equals("(%A)")) {
+    		Dest = "0001";
+    		}
+      	}
     	else if (mnemnonic.length == 6) {
     			Dest = "1111";		
     	}
     	else if (mnemnonic.length == 5) {
-    		if (mnemnonic[2] == "%A" && mnemnonic[3] == "%D"&& mnemnonic[4] == "(%A)") {
+    		if (mnemnonic[2].equals("%A") && mnemnonic[3].equals("%D")&& mnemnonic[4].equals("%D")) {
     		Dest = "1011";
     		}
-    		else if (mnemnonic[2] == "%A" && mnemnonic[3] == "%S"&& mnemnonic[4] == "(%A)") {
+    		else if (mnemnonic[2].equals("%A") && mnemnonic[3].equals("%S")&& mnemnonic[4].equals("(%A)")) {
     		Dest = "1101";
     		} 
-    		else if (mnemnonic[2] == "%A" && mnemnonic[3] == "%S"&& mnemnonic[4] == "%D") {
+    		else if (mnemnonic[2].equals("%A") && mnemnonic[3].equals("%S")&& mnemnonic[4].equals("%D")) {
     		Dest = "1110";
     		} 
-    		else if (mnemnonic[2] == "%S" && mnemnonic[3] == "%D"&& mnemnonic[4] == "(%A)") {
+    		else if (mnemnonic[2].equals("%S") && mnemnonic[3].equals("%D")&& mnemnonic[4].equals("(%A)")) {
     		Dest = "0111";
     		} 
     	}
     	else if (mnemnonic.length == 4) {
-    		if (mnemnonic[2] == "%D" && mnemnonic[3] == "(%A)")  {
+    		if (mnemnonic[2].equals("%D") && mnemnonic[3].equals("(%A)"))  {
     		Dest = "0011";
     		}
-    		else if (mnemnonic[2] == "%S" && mnemnonic[3] == "(%A)") {
+    		else if (mnemnonic[2].equals("%S") && mnemnonic[3].equals("(%A)")) {
     		Dest = "0101";
     		}
-    		else if (mnemnonic[2] == "%S" && mnemnonic[3] == "%D") {
+    		else if (mnemnonic[2].equals("%S") && mnemnonic[3].equals("%D")) {
     		Dest = "0110";
     		}
-    		else if (mnemnonic[2] == "%D" && mnemnonic[3] == "%S") {
+    		else if (mnemnonic[2].equals("%D") && mnemnonic[3].equals("%S")) {
         	Dest = "0110";
         		}
-    		else if (mnemnonic[2] == "%S" && mnemnonic[3] == "%S") {
-            	Dest = "0100";
+    		else if (mnemnonic[2].equals("%S") && mnemnonic[3].equals("%S")) {
+            Dest = "0100";
             		}
-    		else if (mnemnonic[2] == "%A" && mnemnonic[3] == "(%A)") {
+    		else if (mnemnonic[2].equals("%A") && mnemnonic[3].equals("(%A)")) {
     		Dest = "1001";
     		}
-    		else if (mnemnonic[2] == "%A" && mnemnonic[3] == "%D") {
+    		else if (mnemnonic[2].equals("%A") && mnemnonic[3].equals("%D")) {
     		Dest = "1010";
     		}
-    		else if (mnemnonic[2] == "%D" && mnemnonic[3] == "%A") {
-        		Dest = "1000";
+    		else if (mnemnonic[2].equals("%D") && mnemnonic[3].equals("%A")) {
+        	Dest = "1000";
         		}
-    		else if (mnemnonic[2] == "%A" && mnemnonic[3] == "%S") {
+    		else if (mnemnonic[2].equals("%A") && mnemnonic[3].equals("%S")) {
     		Dest = "1100";
     		}
-    		else if (mnemnonic[2] == "%D" && mnemnonic[3] == "%D") {
-        		Dest = "0010";
+    		else if (mnemnonic[2].equals("%D") && mnemnonic[3].equals("%D")) {
+        	Dest = "0010";
         		}
-    		else if (mnemnonic[2] == "(%A)" && mnemnonic[3] == "%A") {
-        		Dest = "1000";
+    		else if (mnemnonic[2].equals("(%A)") && mnemnonic[3].equals("%A")) {
+        	Dest = "1000";
         		}
-    		else if (mnemnonic[2] == "(%A)" && mnemnonic[3] == "%S") {
-        		Dest = "0100";
+    		else if (mnemnonic[2].equals("(%A)") && mnemnonic[3].equals("%S")) {
+        	Dest = "0100";
         		}
-    		else if (mnemnonic[2] == "%A" && mnemnonic[3] == "%A") {
-        		Dest = "1000";
+    		else if (mnemnonic[2].equals("%A") && mnemnonic[3].equals("%A")) {
+        	Dest = "1000";
         		}
-    		else if (mnemnonic[2] == "%D" && mnemnonic[3] == "%D") {
-        		Dest = "0010";
+    		else if (mnemnonic[2].equals("%D") && mnemnonic[3].equals("%D")) {
+        	Dest = "0010";
         		}
     	}
     	else if (mnemnonic.length == 3) {
-    		if (mnemnonic[2] == "%A") {
+    		if (mnemnonic[2].equals("%A")) {
     		Dest = "1000";
     		}
-    		else if (mnemnonic[2] == "%D") {
+    		else if (mnemnonic[2].equals("%D")) {
     		Dest = "0010";
     		}
-    		else if (mnemnonic[2] == "%S") {
+    		else if (mnemnonic[2].equals("%S")) {
     		Dest = "0100";
     		}
-    		else if (mnemnonic[2] == "(%A)") {
+    		else if (mnemnonic[2].equals("(%A)")) {
     		Dest = "0001";
     		}
     	}
       	else if (mnemnonic.length == 2) {
-    		if (mnemnonic[1] == "%A") {
+    		if (mnemnonic[1].equals("%A")) {
     		Dest = "1000";
     		}
-    		else if (mnemnonic[1] == "%D") {
+    		else if (mnemnonic[1].equals("%D")) {
     		Dest = "0010";
     		}
-    		else if (mnemnonic[1] == "%S") {
+    		else if (mnemnonic[1].equals("%S")) {
     		Dest = "0100";
     		}
-    		else if (mnemnonic[1] == "(%A)") {
+    		else if (mnemnonic[1].equals("(%A)")) {
     		Dest = "0001";
     		}
-    	}
-      	else if (mnemnonic[0] == "subw"||mnemnonic[0] == "rsubw"||mnemnonic[0] == "addw"||mnemnonic[0] == "andw"||mnemnonic[0] == "orw") {
-    		if (mnemnonic[1] == "%A") {
-    		Dest = "1000";
-    		}
-    		else if (mnemnonic[1] == "%D") {
-    		Dest = "0010";
-    		}
-    		else if (mnemnonic[1] == "%S") {
-    		Dest = "0100";
-    		}
-    		else if (mnemnonic[1] == "(%A)") {
-    		Dest = "0001";
-    		}
+    	
       	}
     	
       	return Dest;
@@ -140,245 +141,262 @@ public class Code {
     public static String comp(String[] mnemnonic) {
     	String Calc = "10101010";
     	
-    	if (mnemnonic[0] == "jmp"||mnemnonic[0] == "jle"||mnemnonic[0] == "jne"||mnemnonic[0] == "jl"||mnemnonic[0] == "jge"||mnemnonic[0] == "je"||mnemnonic[0] == "jg"||mnemnonic[0] == "jge") {
-    		if (mnemnonic[1] == "%A") {
+    	if (mnemnonic[0].equals("jmp") && mnemnonic.length == 1){
+    		Calc = "00110000";
+    	}
+    	else if (mnemnonic[0].equals("jmp")|| mnemnonic[0].equals("je") || mnemnonic[0].equals("jne") || mnemnonic[0].equals("jg") || mnemnonic[0].equals("jge") || mnemnonic[0].equals("jl") || mnemnonic[0].equals("jle")) {
+    		if (mnemnonic[1].equals("%A")) {
     		Calc = "00110000";
     		}
-    	else if (mnemnonic[1] == "(%A)") {
-    		Calc = "10111011";
+    	else if (mnemnonic[1].equals("(%A)")) {
+    		Calc = "10110111";
     		}
-    	else if (mnemnonic[1] == "%S") {
+    	else if (mnemnonic[1].equals("%S")) {
     		Calc = "01001100";
     		}
-    	else if (mnemnonic[1] == "%D") {
+    	else if (mnemnonic[1].equals("%D")) {
     		Calc = "00001100";
     		}
     	}
-    	else if (mnemnonic[0] == "incw") {
-    		if (mnemnonic[1] == "%A") {
+    	else if (mnemnonic[0].equals("incw")) {
+    		if (mnemnonic[1].equals("%A")) {
     			Calc = "00110111";
     		}
-    		else if (mnemnonic[1] == "(%A)") {
+    		else if (mnemnonic[1].equals("(%A)")) {
     			Calc = "10110111";
     		}
-    		else if (mnemnonic[1] == "%S") {
+    		else if (mnemnonic[1].equals("%S")) {
     			Calc = "01011111";
     		}
-    		else if (mnemnonic[1] == "%D") {
+    		else if (mnemnonic[1].equals("%D")) {
     			Calc = "00011111";
     		}
     	}
     	
-    	else if (mnemnonic[0] == "decw") {
-    		if (mnemnonic[1] == "%A") {
+    	else if (mnemnonic[0].equals("decw")) {
+    		if (mnemnonic[1].equals("%A")) {
     			Calc = "00110010";
     		}
-    		else if (mnemnonic[1] == "(%A)") {
+    		else if (mnemnonic[1].equals("(%A)")) {
 			Calc = "10110010";
     		}
-    		else if (mnemnonic[1] == "%S") {
+    		else if (mnemnonic[1].equals("%S")) {
     			Calc = "01001110";
     		}
-    		else if (mnemnonic[1] == "%D") {
+    		else if (mnemnonic[1].equals("%D")) {
     			Calc = "00001110";
     		}
     }
-    	else if (mnemnonic[0] == "movw") {
-    		if (mnemnonic[1] == "%A") {
+    	else if (mnemnonic[0].equals("movw")) {
+    		if (mnemnonic[1].equals("%A")) {
     			Calc = "00110000";
     		}
-    		else if (mnemnonic[1] == "(%A)") {
+    		else if (mnemnonic[1].equals("(%A)")) {
 			Calc = "10110000";
     		}
-    		else if (mnemnonic[1] == "%S") {
+    		else if (mnemnonic[1].equals("%S")) {
     			Calc = "01001100";
     		}
-    		else if (mnemnonic[1] == "%D") {
+    		else if (mnemnonic[1].equals("%D")) {
     			Calc = "00001100";
     	}
+    	return Calc;
     }
-    	else if (mnemnonic[0] == "notw") {
-        	if (mnemnonic[1] == "%A") {
+    	else if (mnemnonic[0].equals("notw")) {
+        	if (mnemnonic[1].equals("%A")) {
         		Calc = "00110001";
         	}
-        	else if (mnemnonic[1] == "(%A)") {
+        	else if (mnemnonic[1].equals("(%A)")) {
     		Calc = "10110001";
         	}
-       		else if (mnemnonic[1] == "%S") {
+       		else if (mnemnonic[1].equals("%S")) {
        			Calc = "01001101";
        		}
-       		else if (mnemnonic[1] == "%D") {
+       		else if (mnemnonic[1].equals("%D")) {
         			Calc = "00001101";
        	}
     }
-       	else if (mnemnonic[0] == "negw") {
-       		if (mnemnonic[1] == "%A") {
+       	else if (mnemnonic[0].equals("negw")) {
+       		if (mnemnonic[1].equals("%A")) {
        			Calc = "00110011";
        		}
-       		else if (mnemnonic[1] == "(%A)") {
+       		else if (mnemnonic[1].equals("(%A)")) {
        			Calc = "10110011";
        		}
-       		else if (mnemnonic[1] == "%S") {        		
+       		else if (mnemnonic[1].equals("%S")) {        		
        			Calc = "01001111";
        		}
-       		else if (mnemnonic[1] == "%D") {
+       		else if (mnemnonic[1].equals("%D")) {
        			Calc = "00001111";
        		}
        	}
        	
-       	else if (mnemnonic[0] == "addw") {
-       		if (mnemnonic[1] == "%D" && mnemnonic[2] == "%A") {
+       	else if (mnemnonic[0].equals("addw")) {
+       		if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("%A")) {
        			Calc = "00000010";
        		}
-       		else if (mnemnonic[1] == "%A" && mnemnonic[2] == "%D") {
+       		else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%D")) {
        			Calc = "00000010";
        		}
-       		else if (mnemnonic[1] == "%S" && mnemnonic[2] == "%A") {
+       		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("%A")) {
        			Calc = "01000010";
        		}
-       		else if (mnemnonic[1] == "%A" && mnemnonic[2] == "%S") {
+       		else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%S")) {
        			Calc = "01000010";
        		}
-       		else if (mnemnonic[1] == "%D" && mnemnonic[2] == "(%A)") {
+       		else if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("(%A)")) {
        			Calc = "10000010";
        		}
-       		else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%D") {
+       		else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("%D")) {
        			Calc = "10000010";
        		}
-       		else if (mnemnonic[1] == "%S" && mnemnonic[2] == "(%A)") {
+       		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("(%A)")) {
        			Calc = "11000010";
        		}
-       		else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%S") {
+       		else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("%S")) {
        			Calc = "11000010";
        		}
        	}  	
-       		else if (mnemnonic[0] == "subw") {
-           		if (mnemnonic[1] == "%D" && mnemnonic[2] == "%A") {
+       		else if (mnemnonic[0].equals("subw")) {
+           		if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("%A")) {
            			Calc = "00010011";
            		}
-           		else if (mnemnonic[1] == "%A" && mnemnonic[2] == "%D") {
-           			Calc = "00010011";
+           		else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%D")) {
+           			Calc = "00000111";
            		}
-           		else if (mnemnonic[1] == "%S" && mnemnonic[2] == "%A") {
+           		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("%A")) {
            			Calc = "01010011";
            		}
-           		else if (mnemnonic[1] == "%A" && mnemnonic[2] == "%S") {
-           			Calc = "01010011";
+           		else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%S")) {
+           			Calc = "01000111";
            		}
-           		else if (mnemnonic[1] == "%D" && mnemnonic[2] == "(%A)") {
+           		else if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("(%A)")) {
            			Calc = "10010011";
            		}
-           		else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%D") {
-           			Calc = "10010011";
+           		else if (mnemnonic[1].equals("(%A)") && mnemnonic[2] .equals("%D")) {
+           			Calc = "10000111";
            		}
-           		else if (mnemnonic[1] == "%S" && mnemnonic[2] == "(%A)") {
+           		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("(%A)")) {
            			Calc = "11010011";
            		}
-           		else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%S") {
-           			Calc = "11010011";
+           		else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("%S")) {
+           			Calc = "11000111";
            		}
-           		else if (mnemnonic[1] == "%A" && mnemnonic[2] == "$1") {
+           		else if (mnemnonic[1].equals("$1") && mnemnonic[2].equals("%A")) {
            			Calc = "00110010";
            		}
-           		else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "$1") {
+           		else if (mnemnonic[1].equals("$1") && mnemnonic[2].equals("(%A)")) {
            			Calc = "10110010";
            		}
-           		else if (mnemnonic[1] == "%S" && mnemnonic[2] == "$1") {
+           		else if (mnemnonic[1].equals("$1") && mnemnonic[2].equals("%S")) {
            			Calc = "01001110";
            		}
-           		else if (mnemnonic[1] == "%D" && mnemnonic[2] == "$1") {
+           		else if (mnemnonic[1].equals("$1") && mnemnonic[2].equals("%D")) {
+           			Calc = "00001110";
+           		}
+       	
+        		else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("$1")) {
+           			Calc = "00110010";
+           		}
+           		else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("$1")) {
+           			Calc = "10110010";
+           		}
+           		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("$1")) {
+           			Calc = "01001110";
+           		}
+           		else if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("$1")) {
+           			Calc = "00001110";
+           		}
+       		}
+       		else if (mnemnonic[0].equals("rsubw")) {
+           		if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%D")) {
+           			Calc = "00010011";
+           		}
+           		else if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("%A")) {
+           			Calc = "00000111";
+           		}
+           		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("%A")) {
+           			Calc = "01000111";
+           		}
+           		else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%S")) {
+           			Calc = "01010011";
+           		}
+           		else if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("(%A)")) {
+           			Calc = "10000111";
+           		}
+           		else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("%D")) {
+           			Calc = "10010011";
+           		}
+           		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("(%A)")) {
+           			Calc = "11000111";
+           		}
+           		else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("%S")) {
+           			Calc = "11010011";
+           		}
+       		
+           		else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("$1")) {
+           			Calc = "00110010";
+           		}
+           		else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("$1")) {
+           			Calc = "10110010";
+           		}
+           		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("$1")) {
+           			Calc = "01001110";
+           		}
+           		else if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("$1")) {
            			Calc = "00001110";
            		}
        	
        		}
-       		else if (mnemnonic[0] == "rsubw") {
-           		if (mnemnonic[1] == "%A" && mnemnonic[2] == "%D") {
-           			Calc = "00000111";
-           		}
-           		else if (mnemnonic[1] == "%D" && mnemnonic[2] == "%A") {
-           			Calc = "00000111";
-           		}
-           		else if (mnemnonic[1] == "%S" && mnemnonic[2] == "%A") {
-           			Calc = "01000111";
-           		}
-           		else if (mnemnonic[1] == "%A" && mnemnonic[2] == "%S") {
-           			Calc = "01000111";
-           		}
-           		else if (mnemnonic[1] == "%D" && mnemnonic[2] == "(%A)") {
-           			Calc = "10000111";
-           		}
-           		else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%D") {
-           			Calc = "10000111";
-           		}
-           		else if (mnemnonic[1] == "%S" && mnemnonic[2] == "(%A)") {
-           			Calc = "11000111";
-           		}
-           		else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%S") {
-           			Calc = "11000111";
-           		}
-       		
-           		else if (mnemnonic[1] == "$1" && mnemnonic[2] == "%A") {
-           			Calc = "00110010";
-           		}
-           		else if (mnemnonic[1] == "$1" && mnemnonic[2] == "(%A)") {
-           			Calc = "10110010";
-           		}
-           		else if (mnemnonic[1] == "$1" && mnemnonic[2] == "%S") {
-           			Calc = "01001110";
-           		}
-           		else if (mnemnonic[1] == "$1" && mnemnonic[2] == "%D") {
-           			Calc = "00001110";
-           		}
-       		}
-       		else if (mnemnonic[0] == "andw") {
-           		if (mnemnonic[1] == "%D" && mnemnonic[2] == "%A") {
+       		else if (mnemnonic[0].equals("andw")) {
+           		if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("%A")) {
            			Calc = "00000000";
            		}
-           		else if (mnemnonic[1] == "%A" && mnemnonic[2] == "%D") {
+           		else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%D")) {
                		Calc = "00000000";
            		}
-           		else if (mnemnonic[1] == "%S" && mnemnonic[2] == "%A") {
+           		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("%A")) {
            			Calc = "01000000";
            		}
-               	else if (mnemnonic[1] == "%A" && mnemnonic[2] == "%S") {
+               	else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%S")) {
                		Calc = "01000000";
                	}
-               	else if (mnemnonic[1] == "%D" && mnemnonic[2] == "(%A)") {
+               	else if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("(%A)")) {
                		Calc = "10000000";
                	}
-               	else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%D") {
+               	else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("%D")) {
                		Calc = "10000000";
                	}
-               	else if (mnemnonic[1] == "%S" && mnemnonic[2] == "(%A)") {
+               	else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("(%A)")) {
                		Calc = "11000000";
                	}
-               	else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%S") {
+               	else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("%S")) {
                		Calc = "11000000";
                	}
        	}
-          	else if (mnemnonic[0] == "orw") {
-           		if (mnemnonic[1] == "%D" && mnemnonic[2] == "%A") {
+          	else if (mnemnonic[0].equals("orw")) {
+           		if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("%A")) {
            			Calc = "00010101";
            		}
-           		else if (mnemnonic[1] == "%A" && mnemnonic[2] == "%D") {
+           		else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%D")) {
                		Calc = "00010101";
            		}
-           		else if (mnemnonic[1] == "%S" && mnemnonic[2] == "%A") {
+           		else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("%A")) {
            			Calc = "01010101";
            		}
-               	else if (mnemnonic[1] == "%A" && mnemnonic[2] == "%S") {
+               	else if (mnemnonic[1].equals("%A") && mnemnonic[2].equals("%S")) {
                		Calc = "01010101";
                	}
-               	else if (mnemnonic[1] == "%D" && mnemnonic[2] == "(%A)") {
+               	else if (mnemnonic[1].equals("%D") && mnemnonic[2].equals("(%A)")) {
                		Calc = "10010101";
                	}
-               	else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%D") {
+               	else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("%D")) {
                		Calc = "10010101";
                	}
-               	else if (mnemnonic[1] == "%S" && mnemnonic[2] == "(%A)") {
+               	else if (mnemnonic[1].equals("%S") && mnemnonic[2].equals("(%A)")) {
                		Calc = "11010101";
                	}
-               	else if (mnemnonic[1] == "(%A)" && mnemnonic[2] == "%S") {
+               	else if (mnemnonic[1].equals("(%A)") && mnemnonic[2].equals("%S")) {
                		Calc = "11010101";
                	}
        	}
@@ -395,28 +413,28 @@ public class Code {
     public static String jump(String[] mnemnonic) {
     	String JumpBin = "000";
     	
-    	if (mnemnonic[0] == "jmp") {
+    	if (mnemnonic[0].equals("jmp")) {
     		JumpBin = "111";
     	}
-    	else if (mnemnonic[0] == "jle"){
+    	else if (mnemnonic[0].equals("jle")){
     		JumpBin = "110";
     	}
-    	else if (mnemnonic[0] == "jne"){
+    	else if (mnemnonic[0].equals("jne")){
     		JumpBin = "101";
     	}
-    	else if (mnemnonic[0] == "jl"){
+    	else if (mnemnonic[0].equals("jl")){
     		JumpBin = "100";
     	}
-    	else if (mnemnonic[0] == "jge"){
+    	else if (mnemnonic[0].equals("jge")){
     		JumpBin = "011";
     	}
-    	else if (mnemnonic[0] == "je"){
+    	else if (mnemnonic[0].equals("je")){
     		JumpBin = "010";
     	}
-    	else if (mnemnonic[0] == "jg"){
+    	else if (mnemnonic[0].equals("jg")){
     		JumpBin = "001";
     	}
-    	else if (mnemnonic[0] == "jge"){
+    	else if (mnemnonic[0].equals("jge")){
     		JumpBin = "011";
     	}
     	return JumpBin;
