@@ -45,6 +45,17 @@ public class Code {
 
         if(command.equals("add")) {
             commands.add(String.format("; %d - ADD", lineCode++));
+            commands.add("leaw $SP, %A");
+            commands.add("movw (%A), %A");
+            commands.add("decw %A");
+            commands.add("movw (%A), %D");
+            commands.add("movw %A, %S");
+            commands.add("leaw $SP, %A");
+            commands.add("movw %S, (%A)");
+            commands.add("movw (%A), %A");
+            commands.add("decw %A");
+            commands.add("movw (%A), %S");
+            commands.add("add %S, %D, (%A)");
 
         } else if (command.equals("sub")) {
             commands.add(String.format("; %d - SUB", lineCode++));
