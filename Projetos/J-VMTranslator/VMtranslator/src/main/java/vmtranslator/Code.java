@@ -1,4 +1,5 @@
 /**
+
  * Curso: Elementos de Sistemas
  * Arquivo: Code.java
  * Created by Luciano Soares <lpsoares@insper.edu.br>
@@ -195,16 +196,70 @@ public class Code {
             if (segment.equals("constant")) {
                 Error.error("Não faz sentido POP com constant");
             } else if (segment.equals("local")) {
+                commands.add("leaw $SP, %A");
+                commands.add("movw (%A), %A");
+                commands.add("dec %A");
+                commands.add("movw (%A), %D");
+                commands.add("movw %A, %S");
+                commands.add("leaw $SP, %A");
+                commands.add("movw %S, (%A");
+                commands.add("leaw $local, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("argument")) {
+                commands.add("leaw $SP, %A");
+                commands.add("movw (%A), %A");
+                commands.add("dec %A");
+                commands.add("movw (%A), %D");
+                commands.add("movw %A, %S");
+                commands.add("leaw $SP, %A");
+                commands.add("movw %S, (%A");
+                commands.add("leaw $argument, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("this")) {
+                commands.add("leaw $SP, %A");
+                commands.add("movw (%A), %A");
+                commands.add("dec %A");
+                commands.add("movw (%A), %D");
+                commands.add("movw %A, %S");
+                commands.add("leaw $SP, %A");
+                commands.add("movw %S, (%A");
+                commands.add("leaw $this, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("that")) {
+                commands.add("leaw $SP, %A");
+                commands.add("movw (%A), %A");
+                commands.add("dec %A");
+                commands.add("movw (%A), %D");
+                commands.add("movw %A, %S");
+                commands.add("leaw $SP, %A");
+                commands.add("movw %S, (%A");
+                commands.add("leaw $that, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("static")) {
+                commands.add("leaw $SP, %A");
+                commands.add("movw (%A), %A");
+                commands.add("dec %A");
+                commands.add("movw (%A), %D");
+                commands.add("movw %A, %S");
+                commands.add("leaw $SP, %A");
+                commands.add("movw %S, (%A");
+                commands.add("leaw $static, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("temp")) {
+                commands.add("leaw $SP, %A");
+                commands.add("movw (%A), %A");
+                commands.add("dec %A");
+                commands.add("movw (%A), %D");
+                commands.add("movw %A, %S");
+                commands.add("leaw $SP, %A");
+                commands.add("movw %S, (%A");
+                commands.add("leaw $temp, %A");
+                commands.add("movw %D, (%A)");
 
             } else if (segment.equals("pointer")) {
                 if(index==0) {
