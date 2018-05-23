@@ -44,6 +44,7 @@ public class Parser {
      * @param file arquivo VM que será feito o parser.
      */
     public Parser(String file) throws FileNotFoundException {
+    	
     	this.line = new String();
     	
     	try {
@@ -166,7 +167,15 @@ public class Parser {
     	if(commandType(command)==Parser.CommandType.C_POP ||commandType(command)==Parser.CommandType.C_PUSH ){
     		num = command.split("\\s+")[2];
     	}
-		arg = Integer.parseInt(num);
+    	if(commandType(command)==Parser.CommandType.C_FUNCTION ||commandType(command)==Parser.CommandType.C_CALL ){
+    		num = command.split("\\s+")[2];
+    	}
+    	System.out.println(command);
+    	System.out.println(num);
+
+    	arg = Integer.parseInt(num);
+    	//System.out.println(arg);
+
 		return  arg;
     	
     }

@@ -25,7 +25,7 @@ public class ParserTest {
 	 */
 	public ParserTest() {
 		try {
-			parser = new Parser("src/test/resources/SimpleAdd.vm");
+			parser = new Parser("./VMtranslator/src/test/resources/SimpleAdd.vm");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
