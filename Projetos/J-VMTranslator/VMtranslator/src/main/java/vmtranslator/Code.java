@@ -46,19 +46,8 @@ public class Code {
 
         if(command.equals("add")) {
             commands.add(String.format("; %d - ADD", lineCode++));
-            commands.add("leaw $SP,%A");
-            commands.add("movw (%A),%A");
-            commands.add("decw %A");
-            commands.add("movw (%A),%S");
-            commands.add("decw %A");
-            commands.add("addw (%A),%S,%D");
-            commands.add("movw %D, (%A)");
-            
-            commands.add("leaw $SP,%A");
-            commands.add("movw (%A),%D");
-            commands.add("decw %D");
-            commands.add("movw %D,(%A)");
-/*            commands.add("leaw $SP, %A");
+
+           commands.add("leaw $SP, %A");
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %D");
@@ -68,7 +57,7 @@ public class Code {
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %S");
-            commands.add("addw %S, %D, (%A)");*/
+            commands.add("addw %S, %D, (%A)");
             System.out.println("Soma realizada");
 
         } else if (command.equals("sub")) {
@@ -227,7 +216,7 @@ public class Code {
                 commands.add("movw %S, (%A)");
                 commands.add("leaw $LCL, %A");
                 commands.add("movw (%A), %S");
-                commands.add(String.format("leaw $%d , %A", index));
+                commands.add("leaw $"+ index.toString()+ ", %A");
                 commands.add("addw %A, %S, %A");
                 commands.add("movw %D, (%A)");
                 System.out.println(String.format("Guardando valor em local %d ", index));
@@ -243,17 +232,35 @@ public class Code {
                 commands.add("movw %S, (%A)");
                 commands.add("leaw $ARG, %A");
                 commands.add("movw (%A), %S");
-                commands.add(String.format("leaw $%d , %A", index));
+                commands.add("leaw $"+index.toString()+ ", %A");
                 commands.add("addw %A, %S, %A");
                 commands.add("movw %D, (%A)");
                 System.out.println(String.format("Guardando valor em argument %d ", index));
 
 
             } else if (segment.equals("this")) {
-
+            	commands.add("leaw $SP, %A");
+            	commands.add("movw (%A), %A");
+            	commands.add("decw %A");
+            	commands.add("movw (%A), %S");
+            	commands.add("movw %A, %D");
+            	commands.add("leaw $SP, %A");
+            	commands.add("movw %D, (%A)");
+            	commands.add("addw %S,"+index.toString()+",%S");
+            	commands.add("leaw $THIS, %A");
+            	commands.add("movw %S, (%A)");
 
             } else if (segment.equals("that")) {
-
+            	commands.add("leaw $SP, %A");
+            	commands.add("movw (%A), %A");
+            	commands.add("decw %A");
+            	commands.add("movw (%A), %S");
+            	commands.add("movw %A, %D");
+            	commands.add("leaw $SP, %A");
+            	commands.add("movw %D, (%A)");
+            	commands.add("addw %S,"+index.toString()+",%S");
+            	commands.add("leaw $THAT, %A");
+            	commands.add("movw %S, (%A)");
 
             } else if (segment.equals("static")) {
                 commands.add("leaw $SP, %A");
@@ -273,7 +280,7 @@ public class Code {
 
 
             } else if (segment.equals("temp")) {
-            	int temp;
+            	//int temp;
                 commands.add("leaw $SP, %A");
                 commands.add("movw (%A), %A");
                 commands.add("dec %A");
@@ -282,9 +289,10 @@ public class Code {
                 commands.add("leaw $SP, %A");
                 commands.add("movw %S, (%A)");
                 //mudar valor do index
+                index+=5;
                 commands.add("leaw $"+ index.toString() + ", %A");
                 commands.add("movw (%A), %S");
-                commands.add(String.format("leaw $%d , %A", index));
+                commands.add("leaw $"+index.toString()+", %A");
                 commands.add("addw %A, %S, %A");
                 commands.add("movw %D, (%A)");
                 System.out.println(String.format("Guardando valor em temp %d ", index));
@@ -301,7 +309,7 @@ public class Code {
                     commands.add("movw %S, (%A)");
                     commands.add("leaw $THIS, %A");
                     commands.add("movw (%A), %S");
-                    commands.add(String.format("leaw $ %d , %A", index));
+                    commands.add("leaw $"+index.toString()+", %A");
                     commands.add("addw %A, %S, %A");
                     commands.add("movw %D, (%A)");
                     System.out.println("Guardando valor em THIS");
@@ -317,7 +325,7 @@ public class Code {
                     commands.add("movw %S, (%A)");
                     commands.add("leaw $THAT, %A");
                     commands.add("movw (%A), %S");
-                    commands.add(String.format("leaw $%d , %A", index));
+                    commands.add("leaw $"+index.toString()+ ", %A");
                     commands.add("addw %A, %S, %A");
                     commands.add("movw %D, (%A)");
                     System.out.println("Guardando valor em THAT");
@@ -392,6 +400,7 @@ public class Code {
 
             } else if (segment.equals("temp")) {
             	//mudar valor do index
+            	index+=5;
                 commands.add("leaw $"+index.toString()+", %A");
                 commands.add("movw (%A), %A");
                 commands.add("movw (%A), %S");

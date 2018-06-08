@@ -182,7 +182,7 @@ public class Parser {
 
     // fecha o arquivo de leitura
     public void close() throws IOException {
-        fileReader.close();
+       // fileReader.close();
     }
 
 }
