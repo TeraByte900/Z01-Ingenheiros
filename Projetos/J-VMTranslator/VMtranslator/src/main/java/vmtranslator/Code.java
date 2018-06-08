@@ -470,25 +470,28 @@ public class Code {
      */
     public void writeLabel(String label) {
 
-        List<String> commands = new ArrayList<String>();
-        commands.add( "; Label (marcador)" );
+    	public void writeLabel(String label) {
 
-    }
+            List<String> commands = new ArrayList<String>();
+            commands.add( "; Label (marcador)" );
+            commands.add(label + "-" + filename + ":");
 
-    /**
-     * Grava no arquivo de saida as instruções em Assembly para gerar as instruções de goto (jumps).
-     * Realiza um jump incondicional para o label informado.
-     * @param  label define jump a ser realizado para um label (marcador).
-     */
-    public void writeGoto(String label) {
+        }
 
-        List<String> commands = new ArrayList<String>();
-        //commands.add(String.format("; %d - Goto Incondicional", lineCode++));
-        
-        commands.add("leaw $ "+label+", %A"); // Recebe o Label
-        commands.add("jmp"); // jump
-        commands.add("nop"); // nop
+        /**
+         * Grava no arquivo de saida as instruções em Assembly para gerar as instruções de goto (jumps).
+         * Realiza um jump incondicional para o label informado.
+         * @param  label define jump a ser realizado para um label (marcador).
+         */
+        public void writeGoto(String label) {
 
+            List<String> commands = new ArrayList<String>();
+            //commands.add(String.format("; %d - Goto Incondicional", lineCode++));
+            
+            commands.add("leaw $"+ label + "-" + filename +", %A"); // Recebe o Label
+            commands.add("jmp"); // jump
+            commands.add("nop"); // nop
+            
         String[] command = new String[commands.size()];
         commands.toArray(command);
         
