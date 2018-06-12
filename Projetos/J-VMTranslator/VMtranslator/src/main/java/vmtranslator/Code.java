@@ -81,56 +81,28 @@ public class Code {
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %D");
-            commands.add("neg %D, (%A)");
-            commands.add("movw %A, %S");
-            commands.add("leaw $SP, %A");
-            commands.add("movw %S, (%A)");
+            commands.add("negw %D");
+            commands.add("movw %D, (%A)");
             System.out.println("Negação realizada");
 
 
         } else if (command.equals("eq")) {
             commands.add(String.format("; %d - EQ", lineCode++));
-            commands.add("leaw $SP, %A");
-            commands.add("movw (%A), %A");
-            commands.add("decw %A");
-            commands.add("movw (%A), %D");
-            commands.add("movw %A, %S");
-            commands.add("leaw $SP, %A");
-            commands.add("movw %S, (%A)");
-            commands.add("movw (%A), %A");
-            commands.add("decw %A");
-            commands.add("movw (%A), %S");
-            commands.add("eq %S, %D, (%A)");
+
+            
+            
+            
+            
             System.out.println("Comparação de igualdade realizada");
 
         } else if (command.equals("gt")) {
             commands.add(String.format("; %d - GT", lineCode++));
-            commands.add("leaw $SP, %A");
-            commands.add("movw (%A), %A");
-            commands.add("decw %A");
-            commands.add("movw (%A), %D");
-            commands.add("movw %A, %S");
-            commands.add("leaw $SP, %A");
-            commands.add("movw %S, (%A)");
-            commands.add("movw (%A), %A");
-            commands.add("decw %A");
-            commands.add("movw (%A), %S");
-            commands.add("gt %S, %D, (%A)");
+
             System.out.println("Comparação maior menor realizada");
 
         } else if (command.equals("lt")) {
             commands.add(String.format("; %d - LT", lineCode++));
-            commands.add("leaw $SP, %A");
-            commands.add("movw (%A), %A");
-            commands.add("decw %A");
-            commands.add("movw (%A), %D");
-            commands.add("movw %A, %S");
-            commands.add("leaw $SP, %A");
-            commands.add("movw %S, (%A)");
-            commands.add("movw (%A), %A");
-            commands.add("decw %A");
-            commands.add("movw (%A), %S");
-            commands.add("lt %S, %D, (%A)");
+
             System.out.println("Comparação menor maior realizada");
 
         } else if (command.equals("and")) {
@@ -145,7 +117,7 @@ public class Code {
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %S");
-            commands.add("and %S, %D, (%A)");
+            commands.add("andw %S, %D, (%A)");
             System.out.println("Comparação AND realizada");
 
         } else if (command.equals("or")) {
@@ -160,7 +132,7 @@ public class Code {
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %S");
-            commands.add("or %S, %D, (%A)");
+            commands.add("orw %S, %D, (%A)");
             System.out.println("Comparação OR realizada");
 
         } else if (command.equals("not")) {
@@ -169,13 +141,8 @@ public class Code {
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %D");
-            commands.add("movw %A, %S");
-            commands.add("leaw $SP, %A");
-            commands.add("movw %S, (%A)");
-            commands.add("movw (%A), %A");
-            commands.add("decw %A");
-            commands.add("movw (%A), %S");
-            commands.add("not %S, %D, (%A)");
+            commands.add("notw %D");
+            commands.add("movw %D, (%A)");
             System.out.println("NOT realizado");
 
 
@@ -291,9 +258,6 @@ public class Code {
                 //mudar valor do index
                 index+=5;
                 commands.add("leaw $"+ index.toString() + ", %A");
-                commands.add("movw (%A), %S");
-                commands.add("leaw $"+index.toString()+", %A");
-                commands.add("addw %A, %S, %A");
                 commands.add("movw %D, (%A)");
                 System.out.println(String.format("Guardando valor em temp %d ", index));
 
@@ -308,9 +272,9 @@ public class Code {
                     commands.add("leaw $SP, %A");
                     commands.add("movw %S, (%A)");
                     commands.add("leaw $THIS, %A");
-                    commands.add("movw (%A), %S");
-                    commands.add("leaw $"+index.toString()+", %A");
-                    commands.add("addw %A, %S, %A");
+//                    commands.add("movw (%A), %S");
+//                    commands.add("leaw $"+index.toString()+", %A");
+//                    commands.add("addw %A, %S, %A");
                     commands.add("movw %D, (%A)");
                     System.out.println("Guardando valor em THIS");
 
@@ -324,9 +288,9 @@ public class Code {
                     commands.add("leaw $SP, %A");
                     commands.add("movw %S, (%A)");
                     commands.add("leaw $THAT, %A");
-                    commands.add("movw (%A), %S");
-                    commands.add("leaw $"+index.toString()+ ", %A");
-                    commands.add("addw %A, %S, %A");
+//                    commands.add("movw (%A), %S");
+//                    commands.add("leaw $"+index.toString()+ ", %A");
+//                    commands.add("addw %A, %S, %A");
                     commands.add("movw %D, (%A)");
                     System.out.println("Guardando valor em THAT");
 
@@ -336,9 +300,8 @@ public class Code {
             commands.add(String.format("; %d - PUSH %s %d", lineCode++ ,segment, index));
 
             if (segment.equals("constant")) {
-                commands.add("leaw $, %A");
-                commands.add("movw (%A), %A");
-                commands.add("movw (%A), %S");
+                commands.add("leaw $"+index.toString()+", %A");
+                commands.add("movw %A, %S");
                 commands.add("leaw $SP, %A");
                 commands.add("movw (%A), %A");
                 commands.add("movw %S, (%A)");
@@ -379,10 +342,28 @@ public class Code {
 
 
             } else if (segment.equals("this")) {
-
+            	commands.add("leaw THIS, %A");
+            	commands.add("movw (%A), %S");
+            	commands.add("addw %S,"+index.toString()+",%S");
+            	commands.add("leaw SP, %A");
+            	commands.add("leaw (%A), %A");
+            	commands.add("movw %A, %D");
+            	commands.add("movw %S, (%A)");
+            	commands.add("incw %D");
+            	commands.add("leaw SP, %A");
+            	commands.add("movw %D, (%A)");
 
             } else if (segment.equals("that")) {
-
+            	commands.add("leaw THAT, %A");
+            	commands.add("movw (%A), %S");
+            	commands.add("addw %S,"+index.toString()+",%S");
+            	commands.add("leaw SP, %A");
+            	commands.add("leaw (%A), %A");
+            	commands.add("movw %A, %D");
+            	commands.add("movw %S, (%A)");
+            	commands.add("incw %D");
+            	commands.add("leaw SP, %A");
+            	commands.add("movw %D, (%A)");
 
             } else if (segment.equals("static")) {
             	 commands.add("leaw $" + filename+ "-" + index.toString() +" ,%A");
