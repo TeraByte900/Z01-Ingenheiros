@@ -490,13 +490,13 @@ public class Code {
             commands.add("jmp"); // jump
             commands.add("nop"); // nop
             
-        String[] command = new String[commands.size()];
-        commands.toArray(command);
+            String[] stringArray = new String[commands.size()];
+            commands.toArray(stringArray);
+            write(stringArray);
         
         System.out.println(String.format("Goto Incondicional : Pulando para o Label: ", label));
         
-        write(command);
-
+        write(stringArray);
     }
 
     /**
@@ -508,19 +508,23 @@ public class Code {
         	List<String> commands = new ArrayList<String>();
             //commands.add(String.format("; %d - Goto Condicional", lineCode++));
         	
+            commands.add("leaw $"+ label + "-" + filename +", %A"); // Recebe o Label
+            commands.add("movw %A, %S");
         	commands.add("leaw $SP, %A");
             commands.add("movw (%A), %A");
-            commands.add("decw %A");        
-            commands.add("leaw $ "+label+", %A"); // Recebe o Label
-            commands.add("jmp"); // jump
-            commands.add("nop"); // nop
+            commands.add("decw %A");     
+            commands.add("movw $0, %D");
+            commands.add("addw %A,%D,%A");
+            commands.add("je %D");
+            
 
-            String[] command = new String[commands.size()];
-            commands.toArray(command);
+            String[] stringArray = new String[commands.size()];
+            commands.toArray(stringArray);
+            write(stringArray);
             
             System.out.println(String.format("Goto Condicional : Pulando para o Label: ", label));
             
-            write(command);//}
+            write(stringArray);//}
 
          }
         	
