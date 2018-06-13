@@ -51,13 +51,13 @@ public class Code {
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %D");
-            commands.add("movw %A, %S");
-            commands.add("leaw $SP, %A");
-            commands.add("movw %S, (%A)");
-            commands.add("movw (%A), %A");
             commands.add("decw %A");
-            commands.add("movw (%A), %S");
-            commands.add("addw %S, %D, (%A)");
+            commands.add("addw %D, (%A), %S");
+            commands.add("movw %S, (%A)");
+            commands.add("incw %A");
+            commands.add("movw %A, %D");
+            commands.add("leaw $SP, %A");
+            commands.add("movw %D, (%A)");
             System.out.println("Soma realizada");
 
         } else if (command.equals("sub")) {
@@ -66,13 +66,13 @@ public class Code {
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %D");
-            commands.add("movw %A, %S");
-            commands.add("leaw $SP, %A");
-            commands.add("movw %S, (%A)");
-            commands.add("movw (%A), %A");
             commands.add("decw %A");
-            commands.add("movw (%A), %S");
-            commands.add("subw %D, %S, (%A)");
+            commands.add("subw (%A), %D, %S");
+            commands.add("movw %S, (%A)");
+            commands.add("incw %A");
+            commands.add("movw %A, %D");
+            commands.add("leaw $SP, %A");
+            commands.add("movw %D, (%A)");
             System.out.println("Subtração realizada");
 
         } else if (command.equals("neg")) {
@@ -111,13 +111,13 @@ public class Code {
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %D");
-            commands.add("movw %A, %S");
-            commands.add("leaw $SP, %A");
-            commands.add("movw %S, (%A)");
-            commands.add("movw (%A), %A");
             commands.add("decw %A");
-            commands.add("movw (%A), %S");
-            commands.add("andw %S, %D, (%A)");
+            commands.add("andw (%A), %D, %S");
+            commands.add("movw %S, (%A)");
+            commands.add("incw %A");
+            commands.add("movw %A, %D");
+            commands.add("leaw $SP, %A");
+            commands.add("movw %D, (%A)");
             System.out.println("Comparação AND realizada");
 
         } else if (command.equals("or")) {
@@ -126,13 +126,13 @@ public class Code {
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %D");
-            commands.add("movw %A, %S");
-            commands.add("leaw $SP, %A");
-            commands.add("movw %S, (%A)");
-            commands.add("movw (%A), %A");
             commands.add("decw %A");
-            commands.add("movw (%A), %S");
-            commands.add("orw %S, %D, (%A)");
+            commands.add("orw (%A), %D, %S");
+            commands.add("movw %S, (%A)");
+            commands.add("incw %A");
+            commands.add("movw %A, %D");
+            commands.add("leaw $SP, %A");
+            commands.add("movw %D, (%A)");
             System.out.println("Comparação OR realizada");
 
         } else if (command.equals("not")) {
