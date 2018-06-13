@@ -485,10 +485,9 @@ public class Code {
         List<String> commands = new ArrayList<String>();
         //commands.add(String.format("; %d - Goto Incondicional", lineCode++));
         
-        String line = "leaw $ "+label+", %A";
-        commands.add(line);
-        commands.add("jmp");
-        commands.add("nop");
+        commands.add("leaw $ "+label+", %A"); // Recebe o Label
+        commands.add("jmp"); // jump
+        commands.add("nop"); // nop
 
         String[] command = new String[commands.size()];
         commands.toArray(command);
