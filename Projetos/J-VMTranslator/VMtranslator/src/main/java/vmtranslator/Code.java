@@ -47,7 +47,7 @@ public class Code {
         if(command.equals("add")) {
             commands.add(String.format("; %d - ADD", lineCode++));
 
-           commands.add("leaw $SP, %A");
+            commands.add("leaw $SP, %A");
             commands.add("movw (%A), %A");
             commands.add("decw %A");
             commands.add("movw (%A), %D");
@@ -470,8 +470,6 @@ public class Code {
      */
     public void writeLabel(String label) {
 
-    	public void writeLabel(String label) {
-
             List<String> commands = new ArrayList<String>();
             commands.add( "; Label (marcador)" );
             commands.add(label + "-" + filename + ":");
@@ -506,12 +504,26 @@ public class Code {
      * Realiza um jump condicional para o label informado.
      * @param  label define jump a ser realizado para um label (marcador).
      */
-    public void writeIf(String label) {
+        public void writeIf(String label) {
+        	List<String> commands = new ArrayList<String>();
+            //commands.add(String.format("; %d - Goto Condicional", lineCode++));
+        	
+        	commands.add("leaw $SP, %A");
+            commands.add("movw (%A), %A");
+            commands.add("decw %A");        
+            commands.add("leaw $ "+label+", %A"); // Recebe o Label
+            commands.add("jmp"); // jump
+            commands.add("nop"); // nop
 
-        List<String> commands = new ArrayList<String>();
-        commands.add(String.format("; %d - Goto Condicional", lineCode++));
+            String[] command = new String[commands.size()];
+            commands.toArray(command);
+            
+            System.out.println(String.format("Goto Condicional : Pulando para o Label: ", label));
+            
+            write(command);//}
 
-     }
+         }
+        	
 
     /**
      * Grava no arquivo de saida as instruções em Assembly para uma chamada de função (Call).
