@@ -483,7 +483,20 @@ public class Code {
     public void writeGoto(String label) {
 
         List<String> commands = new ArrayList<String>();
-        commands.add(String.format("; %d - Goto Incondicional", lineCode++));
+        //commands.add(String.format("; %d - Goto Incondicional", lineCode++));
+        
+        String line = "leaw $ "+label+", %A";
+        commands.add(line);
+        commands.add("jmp");
+        commands.add("nop");
+
+        String[] command = new String[commands.size()];
+        commands.toArray(command);
+        
+        System.out.println(String.format("Goto Incondicional : Pulando para o Label: ", label));
+        
+        write(command);
+
 
     }
 
