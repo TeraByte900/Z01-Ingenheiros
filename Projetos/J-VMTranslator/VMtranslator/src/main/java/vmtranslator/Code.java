@@ -497,7 +497,6 @@ public class Code {
         
         write(command);
 
-
     }
 
     /**
