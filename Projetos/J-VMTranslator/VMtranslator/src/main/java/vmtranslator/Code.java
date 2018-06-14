@@ -711,13 +711,13 @@ public class Code {
         commands.add("decw %A");
         commands.add("movw %A, %S");
         commands.add("movw (%A), %D");
+        commands.add("leaw $SP, %A");
+        commands.add("movw %S, (%A)");
         commands.add("leaw $"+ label +", %A");
         commands.add("jne %D");
         commands.add("nop");
-       
-        
-
-        
+      
+      
 
         String[] stringArray = new String[commands.size()];
         commands.toArray(stringArray);
