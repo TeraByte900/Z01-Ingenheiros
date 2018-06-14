@@ -87,7 +87,26 @@ public class Code {
 
 
         } else if (command.equals("eq")) {
-            commands.add(String.format("; %d - EQ", lineCode++));
+        	String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder salt = new StringBuilder();
+            Random rnd = new Random();
+            while (salt.length() < 3) { // length of the random string.
+                int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+                salt.append(SALTCHARS.charAt(index));
+            }
+            String Str = salt.toString();
+            
+            String SALTCHARS1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder salt1 = new StringBuilder();
+            Random rnd1 = new Random();
+            while (salt1.length() < 4) { // length of the random string.
+                int index1 = (int) (rnd1.nextFloat() * SALTCHARS1.length());
+                salt1.append(SALTCHARS1.charAt(index1));
+            }
+            String Str1 = salt1.toString();
+        	
+        	
+        	commands.add(String.format("; %d - EQ", lineCode++));
             commands.add("leaw $SP, %A");
             commands.add("movw (%A), %A");
             commands.add("decw %A");
@@ -98,20 +117,24 @@ public class Code {
             commands.add("movw %S, (%A)");
             commands.add("movw (%A), %A");
             commands.add("subw (%A), %D, %S");
-            commands.add("leaw $IGUAL, %A");
+            //commands.add("leaw $IGUAL, %A");
+            commands.add("leaw $"+Str+", %A");
             commands.add("je %S");
             commands.add("nop");
             commands.add("leaw %SP, %A");
             commands.add("movw (%A), %A");
             commands.add("movw $0, (%A)");
-            commands.add("leaw $FIM, %A");
+            //commands.add("leaw $FIM, %A");
+            commands.add("leaw $"+Str1+", %A");
             commands.add("jmp");
             commands.add("nop");
-            commands.add("IGUAL:");
+            //commands.add("IGUAL:");
+            commands.add(Str+":");
             commands.add("leaw %SP, %A");
             commands.add("movw (%A), %A");
             commands.add("movw $-1, (%A)");
-            commands.add("FIM:");
+            //commands.add("FIM:");
+            commands.add(Str1+":");
             commands.add("leaw %SP, %A");
             commands.add("movw (%A), %A");
             commands.add("incw %A");
@@ -120,9 +143,32 @@ public class Code {
             commands.add("movw %D, (%A)");        
                        
             
+            System.out.println("ComparaÃ§Ã£o de igualdade realizada");       
+                       
+            
             System.out.println("Comparação de igualdade realizada");
 
         } else if (command.equals("gt")) {
+            
+            String SALTCHARS4 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder salt4 = new StringBuilder();
+            Random rnd4 = new Random();
+            while (salt4.length() < 5) { // length of the random string.
+                int index4 = (int) (rnd4.nextFloat() * SALTCHARS4.length());
+                salt4.append(SALTCHARS4.charAt(index4));
+            }
+            String Str4 = salt4.toString();
+            
+            String SALTCHARS5 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder salt5 = new StringBuilder();
+            Random rnd5 = new Random();
+            while (salt5.length() < 4) { // length of the random string.
+                int index5 = (int) (rnd5.nextFloat() * SALTCHARS5.length());
+                salt5.append(SALTCHARS5.charAt(index5));
+            }
+            String Str5 = salt5.toString();
+        	
+        	
             commands.add(String.format("; %d - GT", lineCode++));
             commands.add("leaw $SP, %A");
             commands.add("movw (%A), %A");
@@ -134,30 +180,56 @@ public class Code {
             commands.add("movw %S, (%A)");
             commands.add("movw (%A), %A");
             commands.add("subw (%A), %D, %S");
-            commands.add("leaw $IGUAL, %A");
+            //commands.add("leaw $IGUAL, %A");
+            commands.add("leaw $"+Str4+", %A");
             commands.add("jg %S");
             commands.add("nop");
             commands.add("leaw %SP, %A");
             commands.add("movw (%A), %A");
             commands.add("movw $0, (%A)");
-            commands.add("leaw $FIM, %A");
+            //commands.add("leaw $FIM, %A");
+            commands.add("leaw $"+Str5+", %A");
             commands.add("jmp");
             commands.add("nop");
-            commands.add("IGUAL:");
+            //commands.add("IGUAL:");
+            commands.add(Str4+":");
             commands.add("leaw %SP, %A");
             commands.add("movw (%A), %A");
             commands.add("movw $-1, (%A)");
-            commands.add("FIM:");
+            //commands.add("FIM:");
+            commands.add(Str5+":");
             commands.add("leaw %SP, %A");
             commands.add("movw (%A), %A");
             commands.add("incw %A");
             commands.add("movw %A, %D");
             commands.add("leaw $SP, %A");
-            commands.add("movw %D, (%A)");
+            commands.add("movw %D, (%A)");        
+                       
+            
+            System.out.println("ComparaÃ§Ã£o de igualdade realizada");
             System.out.println("Comparação maior menor realizada");
 
         } else if (command.equals("lt")) {
-            commands.add(String.format("; %d - LT", lineCode++));
+            
+            String SALTCHARS2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder salt2 = new StringBuilder();
+            Random rnd2 = new Random();
+            while (salt2.length() < 6) { // length of the random string.
+                int index2 = (int) (rnd2.nextFloat() * SALTCHARS2.length());
+                salt2.append(SALTCHARS2.charAt(index2));
+            }
+            String Str2 = salt2.toString();
+            
+            String SALTCHARS3 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder salt3 = new StringBuilder();
+            Random rnd3 = new Random();
+            while (salt3.length() < 7) { // length of the random string.
+                int index3 = (int) (rnd3.nextFloat() * SALTCHARS3.length());
+                salt3.append(SALTCHARS3.charAt(index3));
+            }
+            String Str3 = salt3.toString();
+        	
+        	
             commands.add(String.format("; %d - LT", lineCode++));
             commands.add("leaw $SP, %A");
             commands.add("movw (%A), %A");
@@ -169,26 +241,33 @@ public class Code {
             commands.add("movw %S, (%A)");
             commands.add("movw (%A), %A");
             commands.add("subw (%A), %D, %S");
-            commands.add("leaw $IGUAL, %A");
+            //commands.add("leaw $IGUAL, %A");
+            commands.add("leaw $"+Str2+", %A");
             commands.add("jl %S");
             commands.add("nop");
             commands.add("leaw %SP, %A");
             commands.add("movw (%A), %A");
             commands.add("movw $0, (%A)");
-            commands.add("leaw $FIM, %A");
+            //commands.add("leaw $FIM, %A");
+            commands.add("leaw $"+Str3+", %A");
             commands.add("jmp");
             commands.add("nop");
-            commands.add("IGUAL:");
+            //commands.add("IGUAL:");
+            commands.add(Str2+":");
             commands.add("leaw %SP, %A");
             commands.add("movw (%A), %A");
             commands.add("movw $-1, (%A)");
-            commands.add("FIM:");
+            //commands.add("FIM:");
+            commands.add(Str3+":");
             commands.add("leaw %SP, %A");
             commands.add("movw (%A), %A");
             commands.add("incw %A");
             commands.add("movw %A, %D");
             commands.add("leaw $SP, %A");
-            commands.add("movw %D, (%A)");
+            commands.add("movw %D, (%A)");        
+                       
+            
+            System.out.println("ComparaÃ§Ã£o de igualdade realizada");
             System.out.println("Comparação menor maior realizada");
 
         } else if (command.equals("and")) {
@@ -367,10 +446,10 @@ public class Code {
                     commands.add("movw %A, %S");
                     commands.add("leaw $SP, %A");
                     commands.add("movw %S, (%A)");            
-                    commands.add("leaw $"+index.toString()+", %A");
-                    commands.add("movw %A, %S");
+//                    commands.add("leaw $"+index.toString()+", %A");
+//                    commands.add("movw %A, %S");
                     commands.add("leaw $THIS, %A");
-                    commands.add("addw %S, %A, %A");
+//                    commands.add("addw %S, %A, %A");
                     commands.add("movw %D, (%A)");
                     System.out.println("Alterando valor ponteiro do THIS");
 
@@ -383,10 +462,10 @@ public class Code {
                     commands.add("movw %A, %S");
                     commands.add("leaw $SP, %A");
                     commands.add("movw %S, (%A)");            
-                    commands.add("leaw $"+index.toString()+", %A");
-                    commands.add("movw %A, %S");
+                    //commands.add("leaw $"+index.toString()+", %A");
+                    //commands.add("movw %A, %S");
                     commands.add("leaw $THAT, %A");
-                    commands.add("addw %S, %A, %A");
+                    //commands.add("addw %S, %A, %A");
                     commands.add("movw %D, (%A)");
                     System.out.println("Alterando valor ponteiro do THAT");
 
@@ -587,7 +666,7 @@ public class Code {
 
         List<String> commands = new ArrayList<String>();
         commands.add( "; Label (marcador)" );
-        commands.add(label + "_" + filename + ":");
+        commands.add(label+":");
         
         String[] stringArray = new String[commands.size()];
         commands.toArray(stringArray);
@@ -605,7 +684,7 @@ public class Code {
         List<String> commands = new ArrayList<String>();
         commands.add(String.format("; %d - Goto Incondicional", lineCode++));
         
-        commands.add("leaw $"+ label + "_" + filename +", %A"); // Recebe o Label
+        commands.add("leaw $"+ label +", %A"); // Recebe o Label
         commands.add("jmp"); // jump
         commands.add("nop"); // nop
         
@@ -625,17 +704,19 @@ public class Code {
      */
     public void writeIf(String label) {
     	List<String> commands = new ArrayList<String>();
-        commands.add(String.format("; %d - Goto Condicional", lineCode++));
+        commands.add(String.format("; %d - If-Goto Condicional", lineCode++));
     	
-        commands.add("leaw $"+ label + "_" + filename +", %A"); // Recebe o Label
-        commands.add("movw %A, %S");
-    	commands.add("leaw $SP, %A");
+        commands.add("leaw $SP, %A");
         commands.add("movw (%A), %A");
-        commands.add("decw %A");     
-        commands.add("movw $0, %D");
-        commands.add("addw %A,%D,%A");
-        commands.add("je %D");
+        commands.add("decw %A");
+        commands.add("movw %A, %S");
+        commands.add("movw (%A), %D");
+        commands.add("leaw $"+ label +", %A");
+        commands.add("jne %D");
         commands.add("nop");
+       
+        
+
         
 
         String[] stringArray = new String[commands.size()];

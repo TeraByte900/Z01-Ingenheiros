@@ -154,6 +154,15 @@ public class Parser {
 	    	if(commandType(command)==Parser.CommandType.C_ARITHMETIC){
 	    		arg = command.toString();
 	        }
+	    	if(commandType(command)==Parser.CommandType.C_LABEL){
+	    		arg = command.split("\\s+")[1];
+	        }
+	    	if(commandType(command)==Parser.CommandType.C_IF){
+	    		arg = command.split("\\s+")[1];
+	        }
+	    	if(commandType(command)==Parser.CommandType.C_GOTO){
+	    		arg = command.split("\\s+")[1];
+	        }
     	}
 	    return arg;	
     }

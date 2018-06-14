@@ -93,6 +93,7 @@ public class VMtranslate {
                                 parser.arg2(parser.command()));
                         break;
                     case C_LABEL:
+          
                         code.writeLabel(parser.arg1(parser.command()));
                         break;
                     case C_GOTO:
