@@ -50,3 +50,4 @@ script:
    - python Projetos/G-Computador/script/testeAssemblyMyCPU.py
    - python Projetos/H-Assembler/scripts/testeAssemblyMyAssembler.py
    - python Projetos/I-VM/scripts/testeVm.py
+   - python Projetos/J-VMTranslator/scripts/testeVmMyTranslator.py
