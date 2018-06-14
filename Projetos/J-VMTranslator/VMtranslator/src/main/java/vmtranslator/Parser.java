@@ -36,7 +36,8 @@ public class Parser {
         C_IF,              // comando if-goto//
         C_FUNCTION,        // declaracao de funcao
         C_RETURN,          // retorno de funcao
-        C_CALL             // chamada de funcao
+        C_CALL,             // chamada de funcao
+        C_NONE
     }
 
     /**
@@ -68,7 +69,7 @@ public class Parser {
     	if (scanner.hasNext()){
     		String helper = scanner.nextLine();
     		helper = helper.trim();
-    		while(scanner.hasNext() && (helper.equals("") || helper.equals("\n") || helper.startsWith(";"))){
+    		while(scanner.hasNext() && (helper.equals("") || helper.equals("\n") || helper.startsWith(";") || helper.startsWith("//"))){
     			helper = scanner.nextLine();
     			helper = helper.trim();
     		}
@@ -126,9 +127,12 @@ public class Parser {
     	if (command.startsWith("call")){
     		return CommandType.C_CALL;
     	}
-    	else{
+    	if (command.startsWith("label")){
     		return CommandType.C_LABEL;
-    	}    }
+    	}  
+    	Error.error(command);
+    	return CommandType.C_NONE;
+    }
 
 
     /**
