@@ -36,7 +36,8 @@ public class Parser {
         C_IF,              // comando if-goto//
         C_FUNCTION,        // declaracao de funcao
         C_RETURN,          // retorno de funcao
-        C_CALL             // chamada de funcao
+        C_CALL,             // chamada de funcao
+        C_NONE
     }
 
     /**
@@ -44,6 +45,7 @@ public class Parser {
      * @param file arquivo VM que será feito o parser.
      */
     public Parser(String file) throws FileNotFoundException {
+    	
     	this.line = new String();
     	
     	try {
@@ -67,7 +69,7 @@ public class Parser {
     	if (scanner.hasNext()){
     		String helper = scanner.nextLine();
     		helper = helper.trim();
-    		while(scanner.hasNext() && (helper.equals("") || helper.equals("\n") || helper.startsWith(";"))){
+    		while(scanner.hasNext() && (helper.equals("") || helper.equals("\n") || helper.startsWith(";") || helper.startsWith("//"))){
     			helper = scanner.nextLine();
     			helper = helper.trim();
     		}
@@ -125,9 +127,12 @@ public class Parser {
     	if (command.startsWith("call")){
     		return CommandType.C_CALL;
     	}
-    	else{
+    	if (command.startsWith("label")){
     		return CommandType.C_LABEL;
-    	}    }
+    	}  
+    	Error.error(command);
+    	return CommandType.C_NONE;
+    }
 
 
     /**
@@ -149,6 +154,15 @@ public class Parser {
 	    	if(commandType(command)==Parser.CommandType.C_ARITHMETIC){
 	    		arg = command.toString();
 	        }
+	    	if(commandType(command)==Parser.CommandType.C_LABEL){
+	    		arg = command.split("\\s+")[1];
+	        }
+	    	if(commandType(command)==Parser.CommandType.C_IF){
+	    		arg = command.split("\\s+")[1];
+	        }
+	    	if(commandType(command)==Parser.CommandType.C_GOTO){
+	    		arg = command.split("\\s+")[1];
+	        }
     	}
 	    return arg;	
     }
@@ -166,14 +180,22 @@ public class Parser {
     	if(commandType(command)==Parser.CommandType.C_POP ||commandType(command)==Parser.CommandType.C_PUSH ){
     		num = command.split("\\s+")[2];
     	}
-		arg = Integer.parseInt(num);
+    	if(commandType(command)==Parser.CommandType.C_FUNCTION ||commandType(command)==Parser.CommandType.C_CALL ){
+    		num = command.split("\\s+")[2];
+    	}
+    	System.out.println(command);
+    	System.out.println(num);
+
+    	arg = Integer.parseInt(num);
+    	//System.out.println(arg);
+
 		return  arg;
     	
     }
 
     // fecha o arquivo de leitura
     public void close() throws IOException {
-        fileReader.close();
+       // fileReader.close();
     }
 
 }
